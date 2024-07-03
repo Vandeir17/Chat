@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Chat App</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="chat-container">
+    <div id="chat-header">
+      <h2>Chat App</h2>
+    </div>
+    <div id="chat-messages"></div>
+    <div id="chat-input">
+      <input type="text" id="message-input" placeholder="Digite sua mensagem...">
+      <button id="send-button">Enviar</button>
+    </div>
+  </div>
+
+  <script>
+    const chatMessages = document.getElementById('chat-messages');
+    const messageInput = document.getElementById('message-input');
+    const sendButton = document.getElementById('send-button');
+
+    sendButton.addEventListener('click', () => {
+      const messageText = messageInput.value;
+      if (messageText.trim() !== '') {
+        addMessage('sent', messageText);
+        messageInput.value = '';
+
+        // Simulação de resposta (em um chat real, isso seria feito via backend)
+        setTimeout(() => {
+          addMessage('received', 'Resposta automática!');
+        }, 1000);
+      }
+    });
+
+    function addMessage(type, text) {
+      const messageElement = document.createElement('div');
+      messageElement.classList.add('message', type);
+      messageElement.textContent = text;
+      chatMessages.appendChild(messageElement);
+      chatMessages.scrollTop = chatMessages.scrollHeight; // Scroll para baixo
+    }
+  </script>
+</body>
+</html>
+
+body {
+  font-family: sans-serif;
+}
+
+#chat-container {
+  width: 500px;
+  height: 300px;
+  border: 1px solid #ccc;
+  overflow-y: scroll;
+}
+
+#messages {
+  list-style: none;
+  padding: 0;
+}
+
+#messages li {
+  padding: 5px;
+}
+
+#input-area {
+  margin-top: 10px;
+}
+
+#message-input {
+  width: 400px;
+  padding: 5px;
+}
+
+#send-button {
+  padding: 5px 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+const messagesList = document.getElementById('messages');
+const messageInput = document.getElementById('message-input');
+const sendButton = document.getElementById('send-button');
+
+sendButton.addEventListener('click', () => {
+  const messageText = messageInput.value;
+  if (messageText.trim() !== '') {
+    const newMessage = document.createElement('li');
+    newMessage.textContent = messageText;
+    messagesList.appendChild(newMessage);
+    messageInput.value = '';
+  }
+});
